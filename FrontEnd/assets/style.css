@@ -61,6 +61,49 @@ body {
     font-size: 14px;
 }
 
+#admin-parent-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color: black;
+    width: 100%;
+}
+
+#admin-div-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 40%;
+}
+
+#admin-i {
+    font-size: 22px;
+    height: 20px;
+    color: white;
+}
+
+#admin-p {
+    font-size: 16px;
+    color: white;
+}
+
+#admin-button-submit {
+    width: 216px;
+    height: 38px;
+    border-radius: 60px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+#admin-button-submit:hover {
+
+    transition-duration: 300ms;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -103,10 +146,13 @@ nav ul {
 nav li {
     padding: 0 10px;
     font-size: 1.2em;
+    cursor: pointer;
+    transition-duration: 300ms;
 }
 
 li:hover {
     color: #B1663C;
+
 }
 
 #introduction {
@@ -247,54 +293,54 @@ footer nav ul {
 }
 
 #login {
-	width: 40%;
-	margin: auto;
+    width: 40%;
+    margin: auto;
 }
 
 #login > * {
-	text-align: center;
+    text-align: center;
 }
 
 #login h2 {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #login p {
-	text-decoration: underline;
-	cursor: pointer;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #login form {
-	text-align: left;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 #login label {
-	margin: 2em 0 1em 0;
+    margin: 2em 0 1em 0;
 }
 
 #login input {
-	height: 51px;
-	font-size: 14px;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    height: 51px;
+    font-size: 14px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 input[type="submit"] {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px;
-	transition-duration: 300ms;
-	font-size: 14px;
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
+    transition-duration: 300ms;
+    font-size: 14px;
 }
 
 input[type="submit"]:hover {
-	background-color: #0E2F28;
-	transition-duration: 300ms;
+    background-color: #0E2F28;
+    transition-duration: 300ms;
 }

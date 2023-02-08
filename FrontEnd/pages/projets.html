@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="../assets/style.css">
 	<script src="../javascript/changePage.js"></script>
+	<script src="https://kit.fontawesome.com/05a5c38ff2.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header id="project-header">
@@ -17,8 +18,8 @@
 	<nav>
 		<ul>
 			<li onclick="changePage('projets')">projets</li>
-			<li onclick="changePage('contact')">contact</li>
-			<li onclick="changePage('login')">login</li>
+			<li>contact</li>
+			<li onclick="changePage('login')" id="project-li-login">login</li>
 			<li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -66,6 +67,7 @@
 </footer>
 
 <script src="../javascript/fetchApi.js"></script>
+<script src="../javascript/admin.js"></script>
 
 </body>
 </html>
