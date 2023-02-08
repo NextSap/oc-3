@@ -16,6 +16,7 @@ fetch("http://localhost:5678/api/works").then(response => response.json()).then(
     data.forEach(element => {
         works.push(element);
     })
+    checkButton("Tous")
 });
 
 function checkButton(category) {
@@ -71,3 +72,4 @@ function removeWorks() {
         gallery.removeChild(figure);
     })
 }
+
