@@ -34,12 +34,17 @@ function loggedin() {
 
     body.insertBefore(aside, document.getElementById("project-header"));
 
+    document.getElementById("buttons").style.display = "none";
+
     // bouton modifier
 
     document.querySelectorAll(".admin-modifier").forEach(element => {
 
         const div_modifier = document.createElement("div");
         div_modifier.setAttribute("class", "admin-div-modifier");
+        div_modifier.onclick = function () {
+            displayModalWorks();
+        }
 
         const icon_modifier = document.createElement("i");
         icon_modifier.setAttribute("class", "fa-regular fa-pen-to-square");
@@ -60,6 +65,7 @@ function loggedin() {
 function logout() {
     document.getElementById("admin-parent-aside").remove();
     document.querySelectorAll(".admin-div-modifier").forEach(element => element.remove());
+    document.getElementById("buttons").style.display = null;
     localStorage.removeItem("token");
     loginButton("ON");
 }
@@ -81,7 +87,6 @@ function loginButton(status) {
         }
     }
     if (status === "OFF") {
-        console.log("LOGOUT")
         li.innerText = "logout";
         li.style.fontWeight = "900";
         li.onclick = function () {
