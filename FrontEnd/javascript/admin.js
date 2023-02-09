@@ -8,8 +8,8 @@ window.addEventListener("load", function () {
 function loggedin() {
     const body = document.getElementsByTagName("body")[0];
 
-    const div = document.createElement("div");
-    div.setAttribute("id", "admin-parent-div");
+    const aside = document.createElement("aside");
+    aside.setAttribute("id", "admin-parent-aside");
 
     const div_container = document.createElement("div");
     div_container.setAttribute("id", "admin-div-container");
@@ -30,38 +30,68 @@ function loggedin() {
     div_container.appendChild(p);
     div_container.appendChild(button);
 
-    div.appendChild(div_container);
+    aside.appendChild(div_container);
 
-    body.insertBefore(div, document.getElementById("project-header"));
+    body.insertBefore(aside, document.getElementById("project-header"));
 
-    const li = document.getElementById("project-li-login");
-    li.innerText = "logout";
-    li.style.fontWeight = "900";
-    li.onclick = function () {
-        logout();
-    }
-    li.onmouseover = function () {
-        li.style.color = "#3C3C3C";
-    }
-    li.onmouseout = function () {
-        li.style.color = "black";
-    }
+    // bouton modifier
+
+    document.querySelectorAll(".admin-modifier").forEach(element => {
+
+        const div_modifier = document.createElement("div");
+        div_modifier.setAttribute("class", "admin-div-modifier");
+
+        const icon_modifier = document.createElement("i");
+        icon_modifier.setAttribute("class", "fa-regular fa-pen-to-square");
+        icon_modifier.setAttribute("id", "admin-i-modifier");
+        div_modifier.appendChild(icon_modifier);
+
+        const h3_modifier = document.createElement("h3");
+        h3_modifier.setAttribute("id", "admin-h3-modifier");
+        h3_modifier.innerText = "modifier"
+        div_modifier.appendChild(h3_modifier);
+
+        element.appendChild(div_modifier);
+    })
+
+    loginButton("OFF");
 }
 
 function logout() {
-    document.getElementById("admin-parent-div").remove();
+    document.getElementById("admin-parent-aside").remove();
+    document.querySelectorAll(".admin-div-modifier").forEach(element => element.remove());
     localStorage.removeItem("token");
+    loginButton("ON");
+}
+
+function loginButton(status) {
     const li = document.getElementById("project-li-login");
-    li.innerText = "login";
-    li.style.color = "black";
-    li.style.fontWeight = "normal";
-    li.onclick = function () {
-        changePage("login")
-    }
-    li.onmouseover = function () {
-        li.style.color = "#B1663C";
-    }
-    li.onmouseout = function () {
+    if (status === "ON") {
+        li.innerText = "login";
         li.style.color = "black";
+        li.style.fontWeight = "normal";
+        li.onclick = function () {
+            changePage("login")
+        }
+        li.onmouseover = function () {
+            li.style.color = "#B1663C";
+        }
+        li.onmouseout = function () {
+            li.style.color = "black";
+        }
+    }
+    if (status === "OFF") {
+        console.log("LOGOUT")
+        li.innerText = "logout";
+        li.style.fontWeight = "900";
+        li.onclick = function () {
+            logout();
+        }
+        li.onmouseover = function () {
+            li.style.color = "#3C3C3C";
+        }
+        li.onmouseout = function () {
+            li.style.color = "black";
+        }
     }
 }

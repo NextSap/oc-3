@@ -61,7 +61,7 @@ body {
     font-size: 14px;
 }
 
-#admin-parent-div {
+#admin-parent-aside {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,7 +100,6 @@ body {
 }
 
 #admin-button-submit:hover {
-
     transition-duration: 300ms;
 }
 
@@ -136,6 +135,13 @@ h2 {
     color: #1D6154
 }
 
+.admin-div-modifier {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 30px;
+}
+
 nav ul {
     display: flex;
     align-items: center;
@@ -152,25 +158,32 @@ nav li {
 
 li:hover {
     color: #B1663C;
-
 }
 
 #introduction {
     display: flex;
     align-items: center;
+    width: auto;
 }
 
 #introduction figure {
-    flex: 1
+    flex: 1;
+    flex-direction: column-reverse;
 }
 
 #introduction img {
     display: block;
     margin: auto;
+    width: 100%;
+}
+
+#img_div {
     width: 80%;
 }
 
 #introduction article {
+    display: flex;
+    flex-direction: column-reverse;
     flex: 1
 }
 
@@ -184,7 +197,20 @@ li:hover {
 
 #portfolio h2 {
     text-align: center;
-    margin-bottom: 1em;
+}
+
+#portfolio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#div_title {
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+    width: 30%;
 }
 
 #buttons {
