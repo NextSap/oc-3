@@ -444,7 +444,7 @@ aside h2 {
     gap: 15px;
 }
 
-#modalworks-buttons button {
+.modal-button {
     width: 237px;
     height: 36px;
     border: none;
@@ -455,7 +455,7 @@ aside h2 {
     transition-duration: 300ms;
 }
 
-#modalworks-buttons button:hover {
+.modal-button:hover {
     background-color: #30766A;
 }
 
@@ -470,9 +470,28 @@ aside h2 {
     gap: 20px;
 }
 
+#delete-work-icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 2px;
+    top: -15px;
+    right: 60px;
+    left: 56px;
+    color: white;
+    height: 12px;
+    width: 12px;
+    z-index: 100;
+    background-color: black;
+}
+
 #modalworks-gallery div {
     height: 120px;
     max-height: 120px;
+    width: 82px;
+    max-width: 82px;
 }
 
 #modalworks-gallery img {
@@ -481,13 +500,25 @@ aside h2 {
     object-fit: cover;
 }
 
-#icon-container {
+#modalworks-icon-div {
+    justify-content: end;
+}
+
+#modalworks-icon-div i {
+    margin: 0;
+}
+
+.icon-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
     width: 85%;
     font-size: 20px;
+}
+
+.icon-container i {
+    cursor: pointer;
 }
 
 #modaladdworks-container {
@@ -566,5 +597,9 @@ aside h2 {
     border: none;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
     background-color: white;
+}
+
+#submit-work {
+    background-color: #A7A7A7;
 }
 

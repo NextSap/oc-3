@@ -47,8 +47,10 @@ function hideModalAddWorks() {
     container.getElementsByTagName("i")[0].style.display = null;
     container.getElementsByTagName("div")[0].style.display = null;
 
-    if(document.getElementById("modal-image") !== null)
+    if (document.getElementById("modal-image") !== null)
         document.getElementById("modal-image").remove();
+
+    document.getElementById("input-file").value = "";
 }
 
 function stopPropagation(event) {
@@ -78,4 +80,21 @@ document.getElementById("input-file").addEventListener("change", function (event
 
 document.getElementById("submit-work").addEventListener("click", function () {
     addWork();
+})
+
+window.addEventListener("input", function (event) {
+    const inputElements = document.querySelectorAll(".input-style");
+    const imageElement = inputElements[0];
+    const nameElement = inputElements[1]
+    const button = document.getElementById("submit-work");
+    if (event.target === imageElement || event.target === nameElement) {
+        console.log(imageElement.files)
+        if (imageElement.files.length === 0 || nameElement.value === "") {
+            button.disabled = true;
+            button.style.backgroundColor = null;
+        } else if (imageElement.files.length !== 0 && nameElement.value !== "") {
+            button.disabled = false;
+            button.style.backgroundColor = "#1D6154";
+        }
+    }
 })

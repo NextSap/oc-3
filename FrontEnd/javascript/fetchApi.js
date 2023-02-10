@@ -5,7 +5,7 @@ let categories = [];
 fetch("http://localhost:5678/api/categories").then(response => response.json()).then(data => {
     createButton("Tous", true, buttonDiv)
     data.forEach(element => {
-        createButton(element.name, false, buttonDiv)
+        createButton(element, false, buttonDiv)
         categories.push(element);
     })
 });
@@ -19,7 +19,7 @@ fetch("http://localhost:5678/api/works").then(response => response.json()).then(
     data.forEach(element => {
         works.push(element);
     })
-    checkButton("Tous")
+    checkButton("0")
 });
 
 function getWorksModal() {
@@ -27,6 +27,8 @@ function getWorksModal() {
     works.forEach(work => {
         const workModal = document.createElement("div");
         workModal.setAttribute("workId", work.id);
+        workModal.style.width = "";
+        workModal.style.position = "relative";
 
         const image = document.createElement("img");
         image.setAttribute("src", work.imageUrl);
@@ -39,6 +41,15 @@ function getWorksModal() {
         edit.innerText = "éditer";
         workModal.appendChild(edit);
 
+        const deleteIcon = document.createElement("i");
+        deleteIcon.setAttribute("class", "fa-regular fa-trash-can")
+        deleteIcon.setAttribute("id", "delete-work-icon")
+        deleteIcon.setAttribute("workId", work.id)
+        deleteIcon.style.fontSize = "15px";
+        deleteIcon.addEventListener("click", function () {
+            deleteWork(work.id);
+        })
+        workModal.appendChild(deleteIcon)
         modalGallery.appendChild(workModal);
     })
 }
@@ -55,14 +66,17 @@ function checkButton(category) {
     getWorks(category)
 }
 
-function createButton(name, active, parent) {
+function createButton(element, active, parent) {
     const button = document.createElement("button");
+    const name = element === "Tous" ? "Tous" : element.name;
+    const categoryId = element === "Tous" ? "0" : element.id;
     button.innerText = name;
     button.setAttribute("class", active ? "active" : "not_active");
+    button.setAttribute("categoryId", categoryId);
     button.onclick = function () {
-        checkButton(name)
+        checkButton(categoryId);
     };
-    parent.appendChild(button)
+    parent.appendChild(button);
 }
 
 function createFigure(source, title) {
@@ -80,10 +94,10 @@ function createFigure(source, title) {
     gallery.appendChild(figure);
 }
 
-function changeCurrentButton(buttonName) {
+function changeCurrentButton(categoryId) {
     removeWorks();
     Array.prototype.slice.call(buttonDiv.getElementsByTagName("button")).forEach(button => {
-        if (button.innerText === buttonName) {
+        if (button.getAttribute("categoryId") === categoryId) {
             button.setAttribute("class", "active")
         } else
             button.setAttribute("class", "not_active")
@@ -92,7 +106,7 @@ function changeCurrentButton(buttonName) {
 
 function getWorks(category) {
     works.forEach(work => {
-        if (work.category.name === category || category === "Tous") {
+        if (work.categoryId === category || category === "0") {
             createFigure(work.imageUrl, work.title);
         }
     })
@@ -150,4 +164,23 @@ function addWork() {
             hideModalAddWorks();
         })
     });
+}
+
+function deleteWork(id) {
+    fetch("http://localhost:5678/api/works/" + id, {
+        method: "DELETE",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
+
+    for (let i = 0; i < works.length; i++) {
+        if (works[i].id === id) {
+            works.splice(i, 1);
+        }
+    }
+    removeWorksModal();
+    getWorksModal();
+    removeWorks();
+    getWorks("0");
 }

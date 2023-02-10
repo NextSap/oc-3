@@ -82,12 +82,14 @@
        style="display: none;"
        aria-hidden="true">
     <div class="modal-wrapper" id="modalworks-wrapper">
-        <i onclick="hideModalWorks()" class="fa-solid fa-xmark"></i>
+        <div id="modalworks-icon-div" class="icon-container">
+            <i onclick="hideModalWorks()" class="fa-solid fa-xmark"></i>
+        </div>
         <div id="modalworks-container">
             <h2 id="titlemodalworks">Galerie photo</h2>
             <div id="modalworks-gallery"></div>
             <div id="modalworks-buttons">
-                <button onclick="displayModalAddWorks();">Ajouter une photo</button>
+                <button class="modal-button" onclick="displayModalAddWorks();">Ajouter une photo</button>
                 <h3>Supprimer la galerie</h3>
             </div>
         </div>
@@ -98,7 +100,7 @@
        style="display: none;"
        aria-hidden="true">
     <div class="modal-wrapper" id="modaladdworks-wrapper">
-        <div id="icon-container">
+        <div class="icon-container">
             <i onclick="hideModalAddWorks(); displayModalWorks();" class="fa-solid fa-arrow-left-long"></i>
             <i onclick="hideModalAddWorks()" class="fa-solid fa-xmark"></i>
         </div>
@@ -108,20 +110,20 @@
                 <div id="modaladdworks-image-container">
                     <i class="fa-regular fa-image"></i>
                     <div>
-                        <label for="input-file">+ Ajouter photo</label>
-                        <input name="imageUrl" id="input-file" type="file" accept="image/png, image/jpg, image/jpeg"
+                        <label for="input-file" style="cursor:pointer;">+ Ajouter photo</label>
+                        <input class="input-style" id="input-file" type="file" accept="image/png, image/jpg, image/jpeg"
                                style="display: none;">
                         <h3>jpg, png : 4mo max</h3>
                     </div>
                 </div>
                 <form id="modaladdworks-form">
                     <label>Titre</label>
-                    <input class="input-style" type="text" id="image-title" name="title">
+                    <input class="input-style" type="text" id="image-title">
                     <label>Catégorie</label>
-                    <select class="input-style" id="category-select" name="categoryId"></select>
+                    <select class="input-style" id="category-select"></select>
                 </form>
             </div>
-            <button id="submit-work">Valider</button>
+            <button class="modal-button" id="submit-work" disabled>Valider</button>
         </div>
     </div>
 </aside>
