@@ -3,7 +3,18 @@ const form = document.getElementById("login-form");
 document.getElementById("login-form").addEventListener("submit", (event) => {
     event.preventDefault();
 
-    login(document.getElementById('email').value, document.getElementById('password').value);
+    const emailElement = document.getElementById("email");
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+    if (document.body.contains(document.getElementById("error")))
+        form.removeChild(document.getElementById("error"));
+
+    if (!emailRegex.test(emailElement.value)) {
+        form.insertBefore(createError("Veuillez entrez une adresse email correcte"), document.getElementById("password-label"));
+        return;
+    }
+
+    login(emailElement.value, document.getElementById('password').value);
 })
 
 function login(email, password) {
@@ -21,21 +32,8 @@ function login(email, password) {
             form.removeChild(document.getElementById("error"));
 
         if (!response.ok) {
-            const errorLabel = document.createElement("label");
-            errorLabel.setAttribute("id", "error")
-            errorLabel.style.color = "red";
-            errorLabel.style.marginTop = "10px";
-
-            switch (response.status) {
-                case 401:
-                    errorLabel.innerText = "Le mot de passe est incorrect";
-                    form.insertBefore(errorLabel, document.getElementById("submit-login"));
-                    break
-                case 404:
-                    errorLabel.innerText = "L'adresse e-mail est incorrecte"
-                    form.insertBefore(errorLabel, document.getElementById("password-label"));
-                    break
-            }
+            if (response.status === 401 || response.status === 404)
+                form.insertBefore(createError("Erreur dans l'identifiant ou le mot de passe"), document.getElementById("password").nextElementSibling);
 
             document.getElementById("password").value = "";
             return;
@@ -46,4 +44,13 @@ function login(email, password) {
             changePage("projets");
         })
     });
+}
+
+function createError(message) {
+    const errorLabel = document.createElement("label");
+    errorLabel.setAttribute("id", "error")
+    errorLabel.style.color = "red";
+    errorLabel.style.marginTop = "10px";
+    errorLabel.innerText = message;
+    return errorLabel;
 }

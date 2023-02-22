@@ -599,6 +599,14 @@ aside h2 {
     background-color: white;
 }
 
+#submit-work-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+}
+
 #submit-work {
     background-color: #A7A7A7;
 }
