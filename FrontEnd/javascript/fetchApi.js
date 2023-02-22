@@ -19,7 +19,7 @@ fetch("http://localhost:5678/api/works").then(response => response.json()).then(
     data.forEach(element => {
         works.push(element);
     })
-    checkButton("0")
+    checkButton(0)
 });
 
 function getWorksModal() {
@@ -69,7 +69,7 @@ function checkButton(category) {
 function createButton(element, active, parent) {
     const button = document.createElement("button");
     const name = element === "Tous" ? "Tous" : element.name;
-    const categoryId = element === "Tous" ? "0" : element.id;
+    const categoryId = element === "Tous" ? 0 : element.id;
     button.innerText = name;
     button.setAttribute("class", active ? "active" : "not_active");
     button.setAttribute("categoryId", categoryId);
@@ -97,16 +97,17 @@ function createFigure(source, title) {
 function changeCurrentButton(categoryId) {
     removeWorks();
     Array.prototype.slice.call(buttonDiv.getElementsByTagName("button")).forEach(button => {
-        if (button.getAttribute("categoryId") === categoryId) {
+        if (Number(button.getAttribute("categoryId")) === categoryId) {
             button.setAttribute("class", "active")
-        } else
+        } else {
             button.setAttribute("class", "not_active")
+        }
     })
 }
 
 function getWorks(category) {
     works.forEach(work => {
-        if (work.categoryId === category || category === "0") {
+        if (work.categoryId === category || category === 0) {
             createFigure(work.imageUrl, work.title);
         }
     })
@@ -172,7 +173,7 @@ function deleteWork(id) {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
-    });
+    }).catch(error => console.log(error));
 
     for (let i = 0; i < works.length; i++) {
         if (works[i].id === id) {
@@ -182,5 +183,5 @@ function deleteWork(id) {
     removeWorksModal();
     getWorksModal();
     removeWorks();
-    getWorks("0");
+    getWorks(0);
 }
