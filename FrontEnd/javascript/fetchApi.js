@@ -1,7 +1,11 @@
 const buttonDiv = document.getElementById("buttons")
-
+const gallery = document.getElementsByClassName("gallery")[0];
+let works = [];
 let categories = [];
 
+/**
+ * Fetch categories
+ */
 fetch("http://localhost:5678/api/categories").then(response => response.json()).then(data => {
     createButton("Tous", true, buttonDiv)
     data.forEach(element => {
@@ -10,11 +14,9 @@ fetch("http://localhost:5678/api/categories").then(response => response.json()).
     })
 });
 
-
-const gallery = document.getElementsByClassName("gallery")[0];
-
-let works = [];
-
+/**
+ * Fetch works
+ */
 fetch("http://localhost:5678/api/works").then(response => response.json()).then(data => {
     data.forEach(element => {
         works.push(element);
@@ -22,6 +24,9 @@ fetch("http://localhost:5678/api/works").then(response => response.json()).then(
     checkButton(0)
 });
 
+/**
+ * Get works for modal
+ */
 function getWorksModal() {
     const modalGallery = document.getElementById("modalworks-gallery");
     works.forEach(work => {
@@ -54,6 +59,9 @@ function getWorksModal() {
     })
 }
 
+/**
+ * Remove work from modal
+ */
 function removeWorksModal() {
     const modalGallery = document.getElementById("modalworks-gallery");
     Array.prototype.slice.call(modalGallery.getElementsByTagName("div")).forEach(element => {
@@ -61,11 +69,21 @@ function removeWorksModal() {
     })
 }
 
+/**
+ *
+ * @param {Number} category - Category id
+ */
 function checkButton(category) {
     changeCurrentButton(category)
     getWorks(category)
 }
 
+/**
+ * Create a filter button
+ * @param {String} element
+ * @param {boolean} active
+ * @param {Element} parent
+ */
 function createButton(element, active, parent) {
     const button = document.createElement("button");
     const name = element === "Tous" ? "Tous" : element.name;
@@ -79,6 +97,11 @@ function createButton(element, active, parent) {
     parent.appendChild(button);
 }
 
+/**
+ * Create a figure for the gallery
+ * @param {String} source - Image source of the figure
+ * @param {String} title - Title of the figure
+ */
 function createFigure(source, title) {
     const figure = document.createElement("figure");
 
@@ -94,6 +117,10 @@ function createFigure(source, title) {
     gallery.appendChild(figure);
 }
 
+/**
+ * Change style of the filter buttons
+ * @param {Number} categoryId
+ */
 function changeCurrentButton(categoryId) {
     removeWorks();
     Array.prototype.slice.call(buttonDiv.getElementsByTagName("button")).forEach(button => {
@@ -105,6 +132,10 @@ function changeCurrentButton(categoryId) {
     })
 }
 
+/**
+ * Create figure for each work
+ * @param {Number} category - Category id
+ */
 function getWorks(category) {
     works.forEach(work => {
         if (work.categoryId === category || category === 0) {
@@ -113,12 +144,18 @@ function getWorks(category) {
     })
 }
 
+/**
+ * Remove works from the gallery
+ */
 function removeWorks() {
     Array.prototype.slice.call(gallery.getElementsByTagName("figure")).forEach(figure => {
         gallery.removeChild(figure);
     })
 }
 
+/**
+ * Add work from the modal
+ */
 function addWork() {
     const form = document.getElementById("modaladdworks-form");
 
@@ -167,6 +204,10 @@ function addWork() {
     });
 }
 
+/**
+ * Delete work from the modal
+ * @param {Number} id - Work id
+ */
 function deleteWork(id) {
     fetch("http://localhost:5678/api/works/" + id, {
         method: "DELETE",

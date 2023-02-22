@@ -1,5 +1,8 @@
 const form = document.getElementById("login-form");
 
+/**
+ * Listener who checks email with regex and call the api with credentials
+ */
 document.getElementById("login-form").addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -17,6 +20,11 @@ document.getElementById("login-form").addEventListener("submit", (event) => {
     login(emailElement.value, document.getElementById('password').value);
 })
 
+/**
+ * Fetch the token if credentials are correct, display an error if not
+ * @param {string} email
+ * @param {string} password
+ */
 function login(email, password) {
     fetch("http://localhost:5678/api/users/login", {
         method: 'POST',
@@ -46,6 +54,10 @@ function login(email, password) {
     });
 }
 
+/**
+ * Display an error label to display an error
+ * @param {string} message - error message
+ */
 function createError(message) {
     const errorLabel = document.createElement("label");
     errorLabel.setAttribute("id", "error")

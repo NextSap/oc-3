@@ -1,3 +1,6 @@
+/**
+ * Listener who logs in if a token is in the localStorage
+ */
 window.addEventListener("load", function () {
     if (window.location.href.split("/")[6] === "projets.html") {
         if (localStorage.getItem("token") !== null)
@@ -5,6 +8,9 @@ window.addEventListener("load", function () {
     }
 })
 
+/**
+ * Create and add admin element when logged in
+ */
 function loggedin() {
     const body = document.getElementsByTagName("body")[0];
 
@@ -62,6 +68,9 @@ function loggedin() {
     loginButton("OFF");
 }
 
+/**
+ * Delete admin element and log out
+ */
 function logout() {
     document.getElementById("admin-parent-aside").remove();
     document.querySelectorAll(".admin-div-modifier").forEach(element => element.remove());
@@ -70,6 +79,10 @@ function logout() {
     loginButton("ON");
 }
 
+/**
+ * Change login navbar button
+ * @param {String} status
+ */
 function loginButton(status) {
     const li = document.getElementById("project-li-login");
     if (status === "ON") {

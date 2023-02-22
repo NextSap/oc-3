@@ -3,6 +3,9 @@ const modalAddWorks = document.getElementById("modaladdworks");
 const submitWorkContainer = document.getElementById("submit-work-container");
 const imageContainer = document.getElementById("modaladdworks-image-container");
 
+/**
+ * Display the modal to manage works
+ */
 function displayModalWorks() {
     modalWorks.style.display = null;
     modalWorks.removeAttribute("aria-hidden");
@@ -12,6 +15,9 @@ function displayModalWorks() {
     getWorksModal();
 }
 
+/**
+ * Hide the modal to manage works
+ */
 function hideModalWorks() {
     modalWorks.style.display = "none";
     modalWorks.removeAttribute("aria-model");
@@ -20,6 +26,9 @@ function hideModalWorks() {
     removeWorksModal();
 }
 
+/**
+ * Display the modal to add works
+ */
 function displayModalAddWorks() {
     hideModalWorks();
     modalAddWorks.style.display = null;
@@ -38,6 +47,9 @@ function displayModalAddWorks() {
     submitWorkContainer.insertBefore(createError("Veuillez compléter tous les champs"), document.getElementById("submit-work"))
 }
 
+/**
+ * Hide the modal to add works
+ */
 function hideModalAddWorks() {
     modalAddWorks.style.display = "none";
     modalAddWorks.removeAttribute("aria-hidden");
@@ -56,10 +68,17 @@ function hideModalAddWorks() {
     submitWorkContainer.removeChild(document.getElementById("error"));
 }
 
+/**
+ * Stop propagation event
+ * @param event
+ */
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
+/**
+ * Listener to close modals when Escape key is pressed
+ */
 window.addEventListener("keydown", function (event) {
     const key = event.key;
     if (key === "Escape" || key === "Esc") {
@@ -68,6 +87,9 @@ window.addEventListener("keydown", function (event) {
     }
 });
 
+/**
+ * Listener to display the image instead of input-file
+ */
 document.getElementById("input-file").addEventListener("change", function (event) {
     imageContainer.getElementsByTagName("i")[0].style.display = "none";
     imageContainer.getElementsByTagName("div")[0].style.display = "none";
@@ -82,10 +104,16 @@ document.getElementById("input-file").addEventListener("change", function (event
     imageContainer.appendChild(image);
 })
 
+/**
+ * Listener who calls "addWorks" method on click on submit work button
+ */
 document.getElementById("submit-work").addEventListener("click", function () {
     addWork();
 })
 
+/**
+ * Listener who checks if the modal add work form is completed and display error if not
+ */
 window.addEventListener("input", function (event) {
     const inputElements = document.querySelectorAll(".input-style");
     const imageElement = inputElements[0];
@@ -105,6 +133,10 @@ window.addEventListener("input", function (event) {
     }
 })
 
+/**
+ * Display an error label to display an error
+ * @param {string} message - error message
+ */
 function createError(message) {
     const errorLabel = document.createElement("label");
     errorLabel.setAttribute("id", "error")
