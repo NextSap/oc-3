@@ -21,11 +21,11 @@ fetch("http://localhost:5678/api/works").then(response => response.json()).then(
     data.forEach(element => {
         works.push(element);
     })
-    checkButton(0)
+    applyFilter(0);
 });
 
 /**
- * Get works for modal
+ * Get works for modal with suppress option
  */
 function getWorksModal() {
     const modalGallery = document.getElementById("modalworks-gallery");
@@ -64,18 +64,18 @@ function getWorksModal() {
  */
 function removeWorksModal() {
     const modalGallery = document.getElementById("modalworks-gallery");
-    Array.prototype.slice.call(modalGallery.getElementsByTagName("div")).forEach(element => {
+    modalGallery.querySelectorAll("div").forEach(element => {
         element.remove();
     })
 }
 
 /**
- *
+ * Apply a filter
  * @param {Number} category - Category id
  */
-function checkButton(category) {
-    changeCurrentButton(category)
-    getWorks(category)
+function applyFilter(category) {
+    changeFilterButtonStyle(category);
+    getWorks(category);
 }
 
 /**
@@ -92,7 +92,7 @@ function createButton(element, active, parent) {
     button.setAttribute("class", active ? "active" : "not_active");
     button.setAttribute("categoryId", categoryId);
     button.onclick = function () {
-        checkButton(categoryId);
+        applyFilter(categoryId);
     };
     parent.appendChild(button);
 }
@@ -121,9 +121,9 @@ function createFigure(source, title) {
  * Change style of the filter buttons
  * @param {Number} categoryId
  */
-function changeCurrentButton(categoryId) {
+function changeFilterButtonStyle(categoryId) {
     removeWorks();
-    Array.prototype.slice.call(buttonDiv.getElementsByTagName("button")).forEach(button => {
+    buttonDiv.querySelectorAll("button").forEach(button => {
         if (Number(button.getAttribute("categoryId")) === categoryId) {
             button.setAttribute("class", "active")
         } else {
@@ -148,7 +148,7 @@ function getWorks(category) {
  * Remove works from the gallery
  */
 function removeWorks() {
-    Array.prototype.slice.call(gallery.getElementsByTagName("figure")).forEach(figure => {
+    gallery.querySelectorAll("figure").forEach(figure => {
         gallery.removeChild(figure);
     })
 }
@@ -187,8 +187,8 @@ function addWork() {
                 case 401:
                     errorLabel.innerText = "Unauhorized (401)";
                     break;
-                case 404:
-                    errorLabel.innerText = "Unexcpected Error (500)";
+                default:
+                    errorLabel.innerText = "Unexpected Error";
                     break;
             }
 
