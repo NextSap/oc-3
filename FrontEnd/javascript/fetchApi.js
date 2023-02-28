@@ -138,7 +138,7 @@ function changeFilterButtonStyle(categoryId) {
  */
 function getWorks(category) {
     works.forEach(work => {
-        if (work.categoryId === category || category === 0) {
+        if (Number(work.categoryId) === category || category === 0) {
             createFigure(work.imageUrl, work.title);
         }
     })
