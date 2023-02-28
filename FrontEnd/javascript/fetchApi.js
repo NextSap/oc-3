@@ -216,6 +216,7 @@ function deleteWork(id) {
         }
     }).catch(error => console.log(error));
 
+    // Delete work in the array
     for (let i = 0; i < works.length; i++) {
         if (works[i].id === id) {
             works.splice(i, 1);

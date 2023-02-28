@@ -60,12 +60,14 @@ function hideModalAddWorks() {
     document.getElementById("image-title").value = "";
     imageContainer.getElementsByTagName("i")[0].style.display = null;
     imageContainer.getElementsByTagName("div")[0].style.display = null;
+    changeButtonState("off");
 
     if (document.getElementById("modal-image") !== null)
         document.getElementById("modal-image").remove();
 
     document.getElementById("input-file").value = "";
-    submitWorkContainer.removeChild(document.getElementById("error"));
+
+    removeErrorLabel(submitWorkContainer);
 }
 
 /**
@@ -118,20 +120,36 @@ window.addEventListener("input", function (event) {
     const inputElements = document.querySelectorAll(".input-style");
     const imageElement = inputElements[0];
     const nameElement = inputElements[1]
-    const button = document.getElementById("submit-work");
+
     if (event.target === imageElement || event.target === nameElement) {
         if (imageElement.files.length === 0 || nameElement.value === "") {
-            button.disabled = true;
-            button.style.backgroundColor = null;
-            if (!submitWorkContainer.contains(document.getElementById("error")))
+            if (!containErrorLabel(submitWorkContainer))
                 submitWorkContainer.insertBefore(createError("Veuillez compléter tous les champs"), document.getElementById("submit-work"))
+            changeButtonState("off");
         } else if (imageElement.files.length !== 0 && nameElement.value !== "") {
-            button.disabled = false;
-            button.style.backgroundColor = "#1D6154";
-            submitWorkContainer.removeChild(document.getElementById("error"));
+            changeButtonState("on");
+            removeErrorLabel(submitWorkContainer);
         }
     }
 })
+
+/**
+ * Change the state of the submit button
+ * @param {String} state - state of the button
+ */
+function changeButtonState(state) {
+    const button = document.getElementById("submit-work");
+    switch (state.toUpperCase()) {
+        case "ON":
+            button.disabled = false;
+            button.style.backgroundColor = "#1D6154";
+            break;
+        case "OFF":
+            button.disabled = true;
+            button.style.backgroundColor = null;
+            break;
+    }
+}
 
 /**
  * Display an error label to display an error
@@ -144,4 +162,22 @@ function createError(message) {
     errorLabel.style.marginTop = "10px";
     errorLabel.innerText = message;
     return errorLabel;
+}
+
+/**
+ *
+ * @param {Element} container - The container
+ * @returns {boolean}
+ */
+function containErrorLabel(container) {
+    return container.contains(document.getElementById("error"));
+}
+
+/**
+ * Remove the error label
+ * @param {Element} container - The container
+ */
+function removeErrorLabel(container) {
+    if (containErrorLabel(container))
+        container.removeChild(document.getElementById("error"));
 }
