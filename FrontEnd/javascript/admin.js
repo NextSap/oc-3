@@ -45,11 +45,12 @@ function loggedin() {
     // bouton modifier
 
     document.querySelectorAll(".admin-modifier").forEach(element => {
-
         const div_modifier = document.createElement("div");
         div_modifier.setAttribute("class", "admin-div-modifier");
-        div_modifier.onclick = function () {
-            displayModalWorks();
+        if (element.classList.contains("admin-modifier-effect")) {
+            div_modifier.onclick = function () {
+                displayModalWorks();
+            }
         }
 
         const icon_modifier = document.createElement("i");

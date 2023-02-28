@@ -4,17 +4,6 @@ let works = [];
 let categories = [];
 
 /**
- * Fetch categories
- */
-fetch("http://localhost:5678/api/categories").then(response => response.json()).then(data => {
-    createButton("Tous", true, buttonDiv)
-    data.forEach(element => {
-        createButton(element, false, buttonDiv)
-        categories.push(element);
-    })
-});
-
-/**
  * Fetch works
  */
 fetch("http://localhost:5678/api/works").then(response => response.json()).then(data => {
@@ -22,6 +11,18 @@ fetch("http://localhost:5678/api/works").then(response => response.json()).then(
         works.push(element);
     })
     applyFilter(0);
+});
+
+
+/**
+ * Fetch categories
+ */
+fetch("http://localhost:5678/api/categories").then(response => response.json()).then(data => {
+    createButton("Tous", true, buttonDiv);
+    data.forEach(element => {
+        createButton(element, false, buttonDiv);
+        categories.push(element);
+    })
 });
 
 /**
@@ -227,3 +228,6 @@ function deleteWork(id) {
     removeWorks();
     getWorks(0);
 }
+
+// Bouton modifier =/=
+// contact vers contact

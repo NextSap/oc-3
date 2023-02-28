@@ -13,7 +13,7 @@ document.getElementById("login-form").addEventListener("submit", (event) => {
         form.removeChild(document.getElementById("error"));
 
     if (!emailRegex.test(emailElement.value)) {
-        form.insertBefore(createError("Veuillez entrez une adresse email correcte"), document.getElementById("password-label"));
+        form.insertBefore(createError("Veuillez entrer une adresse email correcte"), document.getElementById("password-label"));
         return;
     }
 
