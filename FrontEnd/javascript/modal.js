@@ -133,6 +133,11 @@ window.addEventListener("input", function (event) {
     }
 })
 
+document.querySelectorAll(".display-modal-works").forEach(element => element.addEventListener("click", () => displayModalWorks()));
+document.querySelectorAll(".hide-modal-works").forEach(element => element.addEventListener("click", () => hideModalWorks()));
+document.querySelectorAll(".display-modal-add-works").forEach(element => element.addEventListener("click", () => displayModalAddWorks()));
+document.querySelectorAll(".hide-modal-add-works").forEach(element => element.addEventListener("click", () => hideModalAddWorks()));
+
 /**
  * Change the state of the submit button
  * @param {String} state - state of the button

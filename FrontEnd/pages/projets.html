@@ -18,9 +18,9 @@
     <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
     <nav>
         <ul>
-            <li onclick="changePage('projets')">projets</li>
-            <li onclick="changePage('contact')">contact</li>
-            <li onclick="changePage('login')" id="project-li-login">login</li>
+            <li id="nav-projects">projets</li>
+            <li id="nav-contact">contact</li>
+            <li id="nav-login" id="project-li-login">login</li>
             <li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
         </ul>
     </nav>
@@ -83,13 +83,13 @@
        aria-hidden="true">
     <div class="modal-wrapper" id="modalworks-wrapper">
         <div id="modalworks-icon-div" class="icon-container">
-            <i onclick="hideModalWorks()" class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-xmark hide-modal-works"></i>
         </div>
         <div id="modalworks-container">
             <h2 id="titlemodalworks">Galerie photo</h2>
             <div id="modalworks-gallery"></div>
             <div id="modalworks-buttons">
-                <button class="modal-button" onclick="displayModalAddWorks();">Ajouter une photo</button>
+                <button class="modal-button display-modal-add-works">Ajouter une photo</button>
                 <h3>Supprimer la galerie</h3>
             </div>
         </div>
@@ -101,8 +101,8 @@
        aria-hidden="true">
     <div class="modal-wrapper" id="modaladdworks-wrapper">
         <div class="icon-container">
-            <i onclick="hideModalAddWorks(); displayModalWorks();" class="fa-solid fa-arrow-left-long"></i>
-            <i onclick="hideModalAddWorks()" class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-arrow-left-long display-modal-works hide-modal-add-works"></i>
+            <i class="fa-solid fa-xmark hide-modal-add-works"></i>
         </div>
         <div id="modaladdworks-container">
             <h2 id="titlemodaladdworks">Ajout photo</h2>
@@ -133,6 +133,6 @@
 <script src="../javascript/admin.js"></script>
 <script src="../javascript/fetchApi.js"></script>
 <script src="../javascript/modal.js"></script>
-
+<script src="../javascript/base.js"></script>
 </body>
 </html>

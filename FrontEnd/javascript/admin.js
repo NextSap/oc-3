@@ -48,9 +48,7 @@ function loggedin() {
         const div_modifier = document.createElement("div");
         div_modifier.setAttribute("class", "admin-div-modifier");
         if (element.classList.contains("admin-modifier-effect")) {
-            div_modifier.onclick = function () {
-                displayModalWorks();
-            }
+            div_modifier.addEventListener("click", () => displayModalWorks());
         }
 
         const icon_modifier = document.createElement("i");
@@ -85,32 +83,20 @@ function logout() {
  * @param {String} status
  */
 function loginButton(status) {
-    const li = document.getElementById("project-li-login");
+    const li = document.getElementById("nav-login");
     if (status === "ON") {
         li.innerText = "login";
         li.style.color = "black";
         li.style.fontWeight = "normal";
-        li.onclick = function () {
-            changePage("login")
-        }
-        li.onmouseover = function () {
-            li.style.color = "#B1663C";
-        }
-        li.onmouseout = function () {
-            li.style.color = "black";
-        }
+        li.addEventListener("click", () => changePage("login"));
+        li.addEventListener("mouseover", () => li.style.color = "#B1663C");
+        li.addEventListener("mouseout", () => li.style.color = "black");
     }
     if (status === "OFF") {
         li.innerText = "logout";
         li.style.fontWeight = "900";
-        li.onclick = function () {
-            logout();
-        }
-        li.onmouseover = function () {
-            li.style.color = "#3C3C3C";
-        }
-        li.onmouseout = function () {
-            li.style.color = "black";
-        }
+        li.addEventListener("click", () => logout());
+        li.addEventListener("mouseover", () => li.style.color = "#3C3C3C");
+        li.addEventListener("mouseout", () => li.style.color = "black");
     }
 }
