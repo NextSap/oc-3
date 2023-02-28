@@ -6,24 +6,28 @@ let categories = [];
 /**
  * Fetch works
  */
-fetch("http://localhost:5678/api/works").then(response => response.json()).then(data => {
-    data.forEach(element => {
-        works.push(element);
-    })
-    applyFilter(0);
-});
+fetch("http://localhost:5678/api/works")
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(element => {
+            works.push(element);
+        })
+        applyFilter(0);
+    });
 
 
 /**
  * Fetch categories
  */
-fetch("http://localhost:5678/api/categories").then(response => response.json()).then(data => {
-    createButton("Tous", true, buttonDiv);
-    data.forEach(element => {
-        createButton(element, false, buttonDiv);
-        categories.push(element);
-    })
-});
+fetch("http://localhost:5678/api/categories")
+    .then(response => response.json())
+    .then(data => {
+        createButton("Tous", true, buttonDiv);
+        data.forEach(element => {
+            createButton(element, false, buttonDiv);
+            categories.push(element);
+        })
+    });
 
 /**
  * Get works for modal with suppress option

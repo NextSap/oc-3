@@ -2,7 +2,7 @@
  * Listener who logs in if a token is in the localStorage
  */
 window.addEventListener("load", function () {
-    if (window.location.href.split("/")[6] === "projets.html") {
+    if (window.location.href.includes("projets.html")) {
         if (localStorage.getItem("token") !== null)
             loggedin();
     }
